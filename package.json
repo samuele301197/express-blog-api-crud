@@ -1,0 +1,23 @@
+{
+  "name": "express-blog-api-crud",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node --watch app.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuele301197/express-blog-api-crud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuele301197/express-blog-api-crud/issues"
+  },
+  "homepage": "https://github.com/samuele301197/express-blog-api-crud#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
