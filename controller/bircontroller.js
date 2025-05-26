@@ -1,8 +1,14 @@
 import birrePreferite from "../data.js"
 
 const index = (req, res) => {
+    const birreFiltro = req.query.tipologia;
+    let result = birrePreferite;
+    if(birreFiltro !== undefined) {
+        result = birrePreferite.filter((curElem) =>
+        curElem.tipologia.includes(birreFiltro)
+    )};
      res.json ({
-        data: `la mia lista di birre`, birrePreferite
+        data: result,
     });
 }
 
