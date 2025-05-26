@@ -12,6 +12,6 @@ app.use("/posts", birRouter);
 
 app.get("/", (req, res) =>{
     res.json({
-        data: "prima rotta"
+        data: "prima rotta",
     });
 });

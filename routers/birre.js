@@ -1,46 +1,23 @@
 import birrePreferite from "../data.js";
+import birController from "../controller/bircontroller.js";
 import express from "express";
-const router = express();
+const router = express.Router();
 
 // ROTTE
 
 // INDEX
-router.get("/", (req, res) => {
-    res.json ({
-        data: `la mia lista di birre`, birrePreferite
-    })
-});
+router.get("/", birController.index);
 
 // SHOW
-router.get("/:id", (req, res) => {
-    const birreID = parseInt(req.params.id);
-    const birra = birrePreferite.find((curElem) => curElem.id === birreID);
-    res.json({
-        data: `mostro un ID ${birreID}`, birra
-    });
-});
+router.get("/:id", birController.show);
 
 // STORE
-router.post("/", (req, res) => {
-    res.json({
-        data: `aggiungo un elemento al mio post`
-    });
-});
+router.post("/", birController.store);
 
 // UPDATE
-router.put("/:id", (req, res) => {
-    const birreID = req.params.id;
-    res.json({
-        data: `modifico il mio ID ${birreID}`
-    })
-});
+router.put("/:id",birController.update);
 
 // DESTROY
-router.delete("/:id", (req, res) => {
-    const birreID = req.params.id;
-    res.json({
-        data: `elimino il mio ID ${birreID}`
-    });
-});
+router.delete("/:id", birController.destroy);
 
 export default router
