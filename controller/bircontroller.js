@@ -3,14 +3,19 @@ import birrePreferite from "../data.js"
 const index = (req, res) => {
     const birreFiltro = req.query.tipologia;
     let result = birrePreferite;
-    if(birreFiltro !== undefined) {
-        result = birrePreferite.filter((curElem) =>
-        curElem.tipologia.includes(birreFiltro)
-    )};
-     res.json ({
-        data: result,
-    });
-}
+
+    if (birreFiltro) {
+        const filtroLower = birreFiltro.toLowerCase();
+        result = birrePreferite.filter(
+            (birra) =>
+                birra.tipologia &&
+                birra.tipologia.toLowerCase().includes(filtroLower)
+        );
+    }
+
+    res.json({ data: result });
+};
+
 
 const show = (req, res) => {
     const birreID = parseInt(req.params.id);
@@ -21,12 +26,26 @@ const show = (req, res) => {
             error: "birra non trovata",
         });
     }
+    
     res.json({
         data: `mostro un ID ${birreID}`, birra
     });
 }
 
 const store = (req, res) => {
+    const newID = birrePreferite[birrePreferite.length -1].id +1;
+
+    const newBeer = {
+        id: newID,
+        titolo: req.body.titolo,
+        tipologia: req.body.tipologia,
+        immagine: req.body.immagine,
+        tags: req.body.tags,
+    }
+
+    birrePreferite.push(newBeer);
+    console.log(birrePreferite);
+    
     res.json({
         data: `aggiungo un elemento al mio post`
     });
