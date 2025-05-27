@@ -46,15 +46,31 @@ const store = (req, res) => {
     birrePreferite.push(newBeer);
     console.log(birrePreferite);
     
-    res.json({
-        data: `aggiungo un elemento al mio post`
+    res.status(201).json({
+        data: `aggiungo un elemento al mio post`, newBeer
+
     });
 };
 
 const update =  (req, res) => {
-    const birreID = req.params.id;
+    const birreID = parseInt(req.params.id);
+    const index = birrePreferite.findIndex((curElem) => curElem.id === birreID);
+    if(index === -1) {
+        res.status(404);
+        return res.json({
+            error: "Not Found",
+            message: "birra non trovata"
+        })
+    }
+
+    birrePreferite[index].titolo = req.body.titolo || birrePreferite[index].titolo;
+    birrePreferite[index].tipologia = req.body.tipologia || birrePreferite[index].tipologia;
+    birrePreferite[index].immagine = req.body.immagine || birrePreferite[index].immagine;
+    birrePreferite[index].tags = req.body.tags || birrePreferite[index].tags;
+
     res.json({
-        data: `modifico il mio ID ${birreID}`
+         message: `Birra con ID ${birreID} aggiornata con successo`,
+        data: birrePreferite[index]
     })
 };
 
