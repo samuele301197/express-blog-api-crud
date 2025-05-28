@@ -2,6 +2,8 @@ import birrePreferite from "../data.js"
 
 const index = (req, res) => {
     const birreFiltro = req.query.tipologia;
+    // const maxPriceFilter = req.query.maxPrice;
+    // let result = [...birrePreferite];
     let result = birrePreferite;
 
     if (birreFiltro) {
@@ -12,6 +14,10 @@ const index = (req, res) => {
                 birra.tipologia.toLowerCase().includes(filtroLower)
         );
     }
+
+    // if(maxPrice !== undefined) {
+    //     result = result.filter((urPizza) => curPizza.price) <= parseInt(maxPriceFilter)
+    // }
 
     res.json({ data: result });
 };
@@ -63,10 +69,10 @@ const update =  (req, res) => {
         })
     }
 
-    birrePreferite[index].titolo = req.body.titolo || birrePreferite[index].titolo;
-    birrePreferite[index].tipologia = req.body.tipologia || birrePreferite[index].tipologia;
-    birrePreferite[index].immagine = req.body.immagine || birrePreferite[index].immagine;
-    birrePreferite[index].tags = req.body.tags || birrePreferite[index].tags;
+    birrePreferite[index].titolo = req.body.titolo;
+    birrePreferite[index].tipologia = req.body.tipologia;
+    birrePreferite[index].immagine = req.body.immagine;
+    birrePreferite[index].tags = req.body.tags;
 
     res.json({
          message: `Birra con ID ${birreID} aggiornata con successo`,
